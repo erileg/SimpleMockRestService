@@ -30,9 +30,10 @@ var filterByTeamName = (matches, teamName) => {
         var lcTeam1Name = match.Team1.TeamName.toLowerCase();
         var lcTeam2Name = match.Team2.TeamName.toLowerCase();
 
-        return  lcTeam1Name.includes(lcTeamName) ||
-                lcTeam2Name.includes(lcTeamName);
-    });
+        return  match.MatchIsFinished &&
+                (lcTeam1Name.includes(lcTeamName) ||
+                lcTeam2Name.includes(lcTeamName));
+    }).pop() || {};
 }
 
 module.exports = router;
