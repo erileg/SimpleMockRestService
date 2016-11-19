@@ -1,0 +1,15 @@
+{
+  "name": "saleport_mock_rest_service",
+  "version": "1.0.0",
+  "description": "SalePort Mock Rest Service",
+  "license": "MIT",
+  "repository": "bitbucket:engram/ekms",
+  "author": "erle",
+  "private": true,
+  "dependencies": {
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta6",
+    "require-all": "^2.0.0",
+    "xml": "^1.0.1"
+  }
+}
