@@ -13,8 +13,6 @@ var router = (app) => {
                 if (!error && response.statusCode == 200) {
                     var teamName = req.params.teamName;
                     res.json(filterByTeamName(JSON.parse(body), teamName));
-                    // res.set('Content-Type', 'application/json');
-                    // res.send(body);
                 } else {
                     res.status(response.statusCode);
                     var err = new Error("Call to openligadb failed")
@@ -31,7 +29,7 @@ var filterByTeamName = (matches, teamName) => {
         var lcTeamName = teamName.toLowerCase();
         var lcTeam1Name = match.Team1.TeamName.toLowerCase();
         var lcTeam2Name = match.Team2.TeamName.toLowerCase();
-        
+
         return  lcTeam1Name.includes(lcTeamName) ||
                 lcTeam2Name.includes(lcTeamName);
     });
