@@ -1,7 +1,7 @@
 var request = require("request");
 
 var router = (app) => {
-    app.get("/openligadb/bl1/:year", (req, res, next) => {
+    app.get("/openligadb/bl1/:year/:teamName", (req, res, next) => {
         request.get(
             {
                 url: `http://www.openligadb.de/api/getmatchdata/bl1/${req.params.year}`,
@@ -11,8 +11,10 @@ var router = (app) => {
             },
             (error, response, body) => {
                 if (!error && response.statusCode == 200) {
-                    res.set('Content-Type', 'application/json');
-                    res.send(body);
+                    var teamName = req.params.teamName;
+                    res.json(filterByTeamName(JSON.parse(body), teamName));
+                    // res.set('Content-Type', 'application/json');
+                    // res.send(body);
                 } else {
                     res.status(response.statusCode);
                     var err = new Error("Call to openligadb failed")
@@ -21,6 +23,17 @@ var router = (app) => {
                 }
             }
         );
+    });
+}
+
+var filterByTeamName = (matches, teamName) => {
+    return !teamName ? matches : matches.filter((match) => {
+        var lcTeamName = teamName.toLowerCase();
+        var lcTeam1Name = match.Team1.TeamName.toLowerCase();
+        var lcTeam2Name = match.Team2.TeamName.toLowerCase();
+        
+        return  lcTeam1Name.includes(lcTeamName) ||
+                lcTeam2Name.includes(lcTeamName);
     });
 }
 
