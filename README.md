@@ -1,6 +1,8 @@
 # Simple Mock Rest Service
+
 ## Synopsis
-Simple Mock Rest Service for SalePort Software Update testing  
+Simple Mock Rest Service for SalePort Software Update testing
+
 ## Installation
   * Install latest version of Node.js from [https://nodejs.org](https://nodejs.org)
   * Edit config.js for server address and port settings
