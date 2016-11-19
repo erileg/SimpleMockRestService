@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, "public")));
 require("./routes/index.js")(app);
 require("./routes/softwarePackage.js")(app);
 require("./routes/configuration.js")(app);
+require("./routes/openligadb.js")(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
