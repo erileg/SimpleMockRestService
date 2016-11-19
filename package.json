@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "SalePort Mock Rest Service",
   "license": "MIT",
-  "repository": "bitbucket:engram/ekms",
+  "repository": {
+    "type": "git",
+    "url": "https://ChemluthHavanna@bitbucket.org/ChemluthHavanna/simplemockrestservice.git"
+  },
   "author": "erle",
   "private": true,
   "dependencies": {
