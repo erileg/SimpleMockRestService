@@ -24,7 +24,7 @@ var router = function (app) {
 
 var fetchMatchData = function (year, onSuccess, onError) {
     request.get({
-            url: `http://www.openligadb.de/api/getmatchdata/bl1/${year}`,
+            url: `http://www.openl_igadb.de/api/getmatchdata/bl1/${year}`,
             headers: {
                 accept: "application/json",
             },
