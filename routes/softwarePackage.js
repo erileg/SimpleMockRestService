@@ -1,4 +1,4 @@
-var router = (app) => {
+var router = function(app) {
 	var reqCounter = 0;
 
 	var response1 = {

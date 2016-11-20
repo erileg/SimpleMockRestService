@@ -1,4 +1,4 @@
-var router = (app) => {
+var router = function(app) {
 	app.get("/", (req, res) => {
 		var urls = app._router.stack.filter((r) => {
 			return r.route && r.route.path && r.route.path !== "/";
