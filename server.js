@@ -12,12 +12,6 @@ app.set("view engine", "pug");
 app.locals.pretty = true;
 app.use(express.static(path.join(__dirname, "public")));
 
-// // middleware to use for all requests
-// app.use((req, res, next) => {
-//     console.log("Request [%s]: '%s' (%s)", req.connection.remoteAddress, req.url, req.headers["user-agent"]);
-//     next();
-// });
-
 // init api routes
 require("./routes/all.js")(app);
 require("./routes/index.js")(app);
