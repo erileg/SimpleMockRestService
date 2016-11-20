@@ -5,7 +5,7 @@ var router = function (app) {
         var teamName = req.params.teamName;
         var year = req.params.year;
 
-        var cachedMatches = MatchCache.get(getDaysSinceEpoche());
+        var cachedMatches = MatchCache.get();
 
         if (cachedMatches.length > 0) {
             console.log("openligadb service: using cached match results for season %s (%s)", year, new Date(MatchCache.fetchDay * 8.64e7));
@@ -47,10 +47,13 @@ var MatchCache = {
     matches: [],
     put: function(matches) {
         this.matches = matches;
-        this.fetchDay = getDaysSinceEpoche();
+        this.fetchDay = this.getDaysSinceEpoche();
     },
-    get: function(daysSinceEpoche) {
-        return (this.fetchDay >= daysSinceEpoche) ? this.matches : [];
+    get: function() {
+        return (this.fetchDay >= this.getDaysSinceEpoche()) ? this.matches : [];
+    },
+    getDaysSinceEpoche: function () {
+        return Math.floor(new Date() / 8.64e7);
     }
 }
 
@@ -63,9 +66,5 @@ var findLatestMatch = function (matches, teamName) {
         return match.MatchIsFinished && (lcTeam1Name.includes(lcTeamName) || lcTeam2Name.includes(lcTeamName));
     }).pop() || {};
 }
-
-var getDaysSinceEpoche = function () {
-    return Math.floor(new Date() / 8.64e7);
-};
 
 module.exports = router;
