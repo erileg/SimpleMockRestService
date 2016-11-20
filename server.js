@@ -12,7 +12,14 @@ app.set("view engine", "pug");
 app.locals.pretty = true;
 app.use(express.static(path.join(__dirname, "public")));
 
-// init all routes
+// // middleware to use for all requests
+// app.use((req, res, next) => {
+//     console.log("Request [%s]: '%s' (%s)", req.connection.remoteAddress, req.url, req.headers["user-agent"]);
+//     next();
+// });
+
+// init api routes
+require("./routes/all.js")(app);
 require("./routes/index.js")(app);
 require("./routes/softwarePackage.js")(app);
 require("./routes/configuration.js")(app);
@@ -37,9 +44,4 @@ app.use((err, req, res, next) => {
 // start server
 var server = app.listen(config.server.port, config.server.address, () => {
   console.log("Service listening on %s:%s...", server.address().address, server.address().port);
-});
-
-// log all requests
-server.on('request', (req, resp) => {
-  console.log("Request [%s]: '%s' (%s)", req.connection.remoteAddress, req.url, req.headers["user-agent"]);
 });
