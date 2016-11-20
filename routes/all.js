@@ -5,5 +5,3 @@ module.exports = (app) => {
         next();
     });
 }
-
-// module.exports = router;
