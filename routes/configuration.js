@@ -1,6 +1,6 @@
 var xml = require("xml");
 
-var router = function(app) {
+module.exports = (app) => {
 	var config_json = [{
 		"config":[ 
 			{"zipcode": 4711},
@@ -16,5 +16,3 @@ var router = function(app) {
 		res.send(xml(config_json, { declaration: true, indent: true }));
 	});
 }
-
-module.exports = router;

@@ -5,4 +5,4 @@ block content
         h1= title
         ul
             each url in urls
-                li: a(href= url class="button-link") #{url}
+                li: a(href!=url class="button-link") #{url}

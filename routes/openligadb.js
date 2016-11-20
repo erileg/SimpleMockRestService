@@ -1,6 +1,6 @@
 var request = require("request");
 
-var router = function (app) {
+module.exports = (app) => {
     app.get("/openligadb/bl1/:year/:teamName", (req, res, next) => {
         var teamName = req.params.teamName;
         var year = req.params.year;
@@ -24,7 +24,7 @@ var router = function (app) {
 
 var fetchMatchData = function (year, onSuccess, onError) {
     request.get({
-            url: `http://www.openl_igadb.de/api/getmatchdata/bl1/${year}`,
+            url: `http://www.openligadb.de/api/getmatchdata/bl1/${year}`,
             headers: {
                 accept: "application/json",
             },
@@ -67,5 +67,3 @@ var findLatestMatch = function (matches, teamName) {
         return match.MatchIsFinished && (lcTeam1Name.includes(lcTeamName) || lcTeam2Name.includes(lcTeamName));
     }).pop() || {};
 }
-
-module.exports = router;

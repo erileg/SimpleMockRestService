@@ -1,4 +1,4 @@
-var router = function(app) {
+module.exports = (app) => {
     // catch 404 and forward to error handler
     app.use((req, res, next) => {
     var err = new Error('Not Found');
@@ -15,5 +15,3 @@ var router = function(app) {
     res.render('error');
     });
 }
-
-module.exports = router;

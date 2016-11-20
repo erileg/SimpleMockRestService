@@ -1,4 +1,4 @@
-var router = function(app) {
+module.exports = (app) => {
 	var reqCounter = 0;
 
 	var response1 = {
@@ -15,5 +15,3 @@ var router = function(app) {
 		res.json((++reqCounter % 5) == 0 ? response1 : response2);
 	});
 }
-
-module.exports = router;
