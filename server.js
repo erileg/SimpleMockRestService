@@ -12,12 +12,16 @@ app.set("view engine", "pug");
 app.locals.pretty = true;
 app.use(express.static(path.join(__dirname, "public")));
 
-// init api routes
+// middelware for all requests
 require("./routes/all.js")(app);
+
+// init api routes
 require("./routes/index.js")(app);
 require("./routes/softwarePackage.js")(app);
 require("./routes/configuration.js")(app);
 require("./routes/openligadb.js")(app);
+
+// error handling
 require("./routes/error.js")(app);
 
 // start server
