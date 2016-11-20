@@ -2,14 +2,16 @@ var request = require("request");
 
 var router = function (app) {
     app.get("/openligadb/bl1/:year/:teamName", (req, res, next) => {
-        var cachedMatches = MatchCache.get(getDaysSinceEpoche());
         var teamName = req.params.teamName;
+        var year = req.params.year;
+
+        var cachedMatches = MatchCache.get(getDaysSinceEpoche());
 
         if (cachedMatches.length > 0) {
-            console.log("openligadb service: using cached match results for season %s (%d)", req.params.year, MatchCache.fetchDay);
+            console.log("openligadb service: using cached match results for season %s (%s)", year, new Date(MatchCache.fetchDay * 8.64e7));
             res.json(findLatestMatch(cachedMatches, teamName));
         } else {
-            console.log("openligadb service: updating match results for season %s", req.params.year);
+            console.log("openligadb service: updating match results for season %s", year);
             fetchMatchData(req.params.year, (matches) => {
                 MatchCache.put(matches);
                 res.json(findLatestMatch(matches, teamName));
