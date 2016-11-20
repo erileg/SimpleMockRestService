@@ -26,8 +26,10 @@ var fetchMatchData = function (year, onSuccess, onError) {
     request.get({
             url: `http://www.openligadb.de/api/getmatchdata/bl1/${year}`,
             headers: {
-                accept: "application/json"
-            }
+                accept: "application/json",
+            },
+            gzip: true
+
         }, (err, res, body) => {
             if (!err && res.statusCode == 200) {
                 onSuccess(JSON.parse(body));
