@@ -12,7 +12,7 @@ app.set("view engine", "pug");
 app.locals.pretty = true;
 app.use(express.static(path.join(__dirname, "public")));
 
-// middelware for all requests
+// middleware for all requests
 require("./routes/all.js")(app);
 
 // init api routes
