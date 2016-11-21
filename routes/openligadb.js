@@ -1,6 +1,6 @@
 var request = require("request");
 
-module.exports = (app) => {
+module.exports = app => {
     app.get("/openligadb/bl1/:year/:teamName", (req, res, next) => {
         var teamName = req.params.teamName;
         var year = req.params.year;
@@ -12,10 +12,10 @@ module.exports = (app) => {
             res.json(findLatestMatch(cachedMatches, teamName));
         } else {
             console.log("openligadb service: updating match results for season %s", year);
-            fetchMatchData(req.params.year, (matches) => {
+            fetchMatchData(req.params.year, matches => {
                 MatchCache.putMatches(matches);
                 res.json(findLatestMatch(matches, teamName));
-            }, (err) => {
+            }, err => {
                 next(err, req, res);
             });
         }
@@ -59,7 +59,7 @@ var MatchCache = {
 }
 
 var findLatestMatch = function (matches, teamName) {
-    return !teamName ? matches : matches.filter((match) => {
+    return !teamName ? matches : matches.filter(match => {
         var lcTeamName = teamName.toLowerCase();
         var lcTeam1Name = match.Team1.TeamName.toLowerCase();
         var lcTeam2Name = match.Team2.TeamName.toLowerCase();

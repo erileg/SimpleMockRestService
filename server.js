@@ -1,27 +1,43 @@
 // modules
 var express = require("express");
 var app = express();
+var mongoose = require("mongoose");
+var bodyParser = require("body-parser");
+var methodOverride = require('method-override');
 var path = require("path");
 
 // read configuration
-var config = require("./config.js");
+var config = require("./config");
+
+// Connect to MongoDB
+mongoose.connect(config.mongodDbUrl);
 
 // setup express to use pug template engine
 app.set("view engine", "pug");
 app.locals.pretty = true;
 app.use(express.static(path.join(__dirname, "public")));
 
-// middleware for all requests
-require("./routes/all.js")(app);
+// body parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(methodOverride());
 
-// init api routes
-require("./routes/index.js")(app);
-require("./routes/softwarePackage.js")(app);
-require("./routes/configuration.js")(app);
-require("./routes/openligadb.js")(app);
+// middleware for all requests
+require("./routes/all")(app);
+
+// init saleport routes
+require("./routes/index")(app);
+require("./routes/softwarePackage")(app);
+require("./routes/configuration")(app);
+
+// openligadb example
+require("./routes/openligadb")(app);
+
+// mongoose api
+require("./routes/todo")(app);
 
 // error handling
-require("./routes/error.js")(app);
+require("./routes/error")(app);
 
 // start server
 var server = app.listen(config.server.port, config.server.address, () => {

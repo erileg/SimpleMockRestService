@@ -1,6 +1,6 @@
 var xml = require("xml");
 
-module.exports = (app) => {
+module.exports = app => {
 	var config_json = [{
 		"config":[ 
 			{"zipcode": 4711},

@@ -4,5 +4,5 @@ block content
     div(class="box")
         h1= title
         ul
-            each url in urls
-                li: a(href=url class="button-link") #{url}
+            each route in routes
+                li: a(href=route.url class="button-link") #{route.url} [#{route.method}] 

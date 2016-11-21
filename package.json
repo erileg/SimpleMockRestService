@@ -10,7 +10,9 @@
   "author": "erle",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "method-override": "^2.3.7",
     "pug": "^2.0.0-beta6",
     "request": "^2.79.0",
     "xml": "^1.0.1"

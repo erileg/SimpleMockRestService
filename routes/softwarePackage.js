@@ -1,6 +1,6 @@
 var config = require("../config.js");
 
-module.exports = (app) => {
+module.exports = app => {
 	var reqCounter = 0;
 
 	var response1 = {
