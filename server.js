@@ -2,10 +2,9 @@
 var express = require("express");
 var app = express();
 var path = require("path");
-var fs = require("fs");
 
-// read configuration file
-var config = JSON.parse(fs.readFileSync("config.json"));
+// read configuration
+var config = require("./config.js");
 
 // setup express to use pug template engine
 app.set("view engine", "pug");
