@@ -3,7 +3,6 @@ var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-// var methodOverride = require('method-override');
 var path = require("path");
 
 // read configuration
@@ -11,6 +10,12 @@ var config = require("./config");
 
 // Connect to MongoDB
 mongoose.connect(config.mongodDbUrl);
+mongoose.connection.on('error', () => {
+  console.log('MongoDB connection error:')
+});
+mongoose.connection.on('disconnected', () => {  
+  console.log('MongoDB default connection disconnected'); 
+});
 
 // setup express to use pug template engine
 app.set("view engine", "pug");
