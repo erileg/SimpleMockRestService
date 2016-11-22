@@ -1,11 +1,12 @@
 var request = require("request");
+var matchCache = require("../modules/match-cache");
 
 module.exports = app => {
     app.get("/openligadb/bl1/:year/:teamName", (req, res, next) => {
         var teamName = req.params.teamName;
         var year = req.params.year;
 
-        var cachedMatches = MatchCache.getMatches();
+        var cachedMatches = matchCache.getMatches();
 
         if (cachedMatches.length > 0) {
             console.log("openligadb service: using cached match results for season %s (%s)", year, new Date(MatchCache.fetchDay * 8.64e7));
@@ -13,7 +14,7 @@ module.exports = app => {
         } else {
             console.log("openligadb service: updating match results for season %s", year);
             fetchMatchData(req.params.year, matches => {
-                MatchCache.putMatches(matches);
+                matchCache.putMatches(matches);
                 res.json(findLatestMatch(matches, teamName));
             }, err => {
                 next(err, req, res);
@@ -41,21 +42,6 @@ var fetchMatchData = function (year, onSuccess, onError) {
             }
         }
     );
-}
-
-var MatchCache = {
-    fetchDay: 0,
-    matches: [],
-    putMatches: function(matches) {
-        this.matches = matches;
-        this.fetchDay = this.getCurrentDay();
-    },
-    getMatches: function() {
-        return (this.fetchDay >= this.getCurrentDay()) ? this.matches : [];
-    },
-    getCurrentDay: function () {
-        return Math.floor(new Date() / 8.64e7);
-    }
 }
 
 var findLatestMatch = function (matches, teamName) {

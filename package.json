@@ -1,7 +1,7 @@
 {
-  "name": "saleport_mock_rest_service",
+  "name": "spiff_rest_service",
   "version": "1.0.0",
-  "description": "SalePort Mock Rest Service",
+  "description": "Spiff Rest Service",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -12,9 +12,8 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "method-override": "^2.3.7",
+    "mongoose": "^4.6.8",
     "pug": "^2.0.0-beta6",
-    "request": "^2.79.0",
-    "xml": "^1.0.1"
+    "request": "^2.79.0"
   }
 }

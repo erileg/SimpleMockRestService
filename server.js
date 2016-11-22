@@ -3,7 +3,7 @@ var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-var methodOverride = require('method-override');
+// var methodOverride = require('method-override');
 var path = require("path");
 
 // read configuration
@@ -18,17 +18,14 @@ app.locals.pretty = true;
 app.use(express.static(path.join(__dirname, "public")));
 
 // body parser
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(methodOverride());
+// app.use(methodOverride());
 
 // middleware for all requests
 require("./routes/all")(app);
 
 // init saleport routes
 require("./routes/index")(app);
-require("./routes/softwarePackage")(app);
-require("./routes/configuration")(app);
 
 // openligadb example
 require("./routes/openligadb")(app);
