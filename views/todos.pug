@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    div(class="box")
+        h1= title
+        ul
+            each todo in todos
+                li= todo.text 
