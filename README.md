@@ -1,7 +1,7 @@
-# Simple Mock Rest Service
+# Spiff Rest Service
 
 ## Synopsis
-Simple Mock Rest Service for SalePort Software Update testing
+Spiff Rest Service
 
 ## Installation
   * Install latest version of Node.js from [https://nodejs.org](https://nodejs.org)
