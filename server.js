@@ -10,11 +10,11 @@ var config = require("./config");
 
 // Connect to MongoDB
 mongoose.connect(config.mongodDbUrl);
-mongoose.connection.on('error', () => {
-  console.log('MongoDB connection error:')
+mongoose.connection.on('error', err => {
+  console.log('MongoDB connection error: ' + err);
 });
-mongoose.connection.on('disconnected', () => {  
-  console.log('MongoDB default connection disconnected'); 
+mongoose.connection.on('disconnected', err => {  
+  console.log('MongoDB default connection disconnected: ' + err); 
 });
 
 // setup express to use pug template engine
