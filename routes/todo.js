@@ -4,24 +4,24 @@ module.exports = app => {
     // show all todos
     app.get('/api/todos', (req, res, next) => {
         // use mongoose to get all todos in the database
-        Todo.find(function (err, todos) {
+        Todo.find((err, todos) => {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
                 next(err, req, res);
 
             res.format({
-                html: function () {
+                html: () => {
                     res.render("todos", {
                         title: "ToDos",
                         "todos": todos
                     });
                 },
-                json: function () {
+                json: () => {
                     res.json(todos); // return all todos in JSON format
                 }
 
             });
-        });
+        }).maxTime(1000);
     });
 
     // create todo and send back all todos after creation
@@ -29,12 +29,12 @@ module.exports = app => {
         Todo.create({
             text: req.body.text,
             done: false
-        }, function (err, todo) {
+        }, (err, todo) => {
             if (err)
                 next(err, req, res);
 
             // get and return all the todos after you create another
-            Todo.find(function (err, todos) {
+            Todo.find((err, todos) => {
                 if (err)
                     next(err, req, res);
                 res.json(todos);
@@ -51,7 +51,7 @@ module.exports = app => {
                 next(err, req, res);
 
             // get and return all the todos after you removed another
-            Todo.find(function (err, todos) {
+            Todo.find((err, todos) => {
                 if (err)
                     next(err, req, res);
                 res.json(todos);
