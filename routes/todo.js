@@ -19,7 +19,6 @@ module.exports = app => {
                     json: () => {
                         res.json(todos); // return all todos in JSON format
                     }
-
                 })
             };
         });
