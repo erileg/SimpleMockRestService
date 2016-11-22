@@ -16,7 +16,6 @@ module.exports = app => {
                         "todos": todos
                     });
                 },
-
                 json: function () {
                     res.json(todos); // return all todos in JSON format
                 }
@@ -27,8 +26,6 @@ module.exports = app => {
 
     // create todo and send back all todos after creation
     app.post('/api/todos', (req, res) => {
-
-        // create a todo, information comes from AJAX request from Angular
         Todo.create({
             text: req.body.text,
             done: false
@@ -43,7 +40,6 @@ module.exports = app => {
                 res.json(todos);
             });
         });
-
     });
 
     // delete a todo
